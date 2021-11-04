@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+use App\Models\Like;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
@@ -12,9 +14,17 @@ class Post extends Model
         'body',
     ];
     
+    public function LikedBy(User $user)
+    {
+        return $user->likes->contains('user_id',$user->id);
+    }
     public function User()
     {
         return $this->belongsTo(User::class);
         
+    }
+    public function Likes()
+    {
+        return $this->hasMany(Like::class);
     }
 }

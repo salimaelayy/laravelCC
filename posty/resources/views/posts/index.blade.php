@@ -22,10 +22,19 @@
                         <span class="text-gray-600 text-sm">{{$post->created_at->diffForHumans()}}</span>
                         <p class="mb-5"> {{$post->body}}</p>
                     </div>
+                    <div>
+                        <form action="{{route('posts.likes',$post->id)}}" method="POST" class="mr-5 inline">
+                            @csrf
+                            <button type="submit" class="text-blue-200"> like</button>
+                        </form>
+                        <form action="post" class="mr-5 inline">
+                            @csrf
+                            <button type="submit" class="text-blue-200"> Unlike</button>
+                        </form>
+                        <span class='text-xs'>{{$post->Likes->count()}} {{Str::plural('like',$post->Likes->count())}}</span>
+                    </div>
                 @endforeach
-                <div>
                     {{$posts->links()}}
-                </div>
             @else
                 <p>there are no posts</p> 
             @endif

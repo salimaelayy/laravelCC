@@ -12,7 +12,11 @@
         <ul class="flex items-center">
             <li class="p-4"><a href="{{route('home')}}">home</a></li>
             <li class="p-4"> <a href="{{route('dashboard')}}">Dashboard</a></li>
-            <li class="p-4"><a href="{{route('posts')}}">posts</a></li>
+            @if(auth()->user())
+                <li class="p-4"><a href="{{route('posts')}}">posts</a></li>
+            @else
+            <li class="p-4"><a href="{{route('login')}}">posts</a></li>
+            @endif
         </ul>
         <ul class="flex items-center">
             @if (auth()->user())
