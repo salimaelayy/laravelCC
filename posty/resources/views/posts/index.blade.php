@@ -13,25 +13,41 @@
                         </div>
                     @enderror
                 </div>
-                <button type="submit" class="bg-blue-400 rounded-lg p-3 ">Post</button>
+                <button  type="submit" class="bg-blue-400 rounded-lg p-3 m-3 ">Post</button>
             </form>
             @if($posts->count())
                 @foreach ($posts as $post )
-                    <div class="mb-5">
-                        <a href="" class="font-bold">{{$post->user->name}}</a>
-                        <span class="text-gray-600 text-sm">{{$post->created_at->diffForHumans()}}</span>
+                    <div class="mb-5 bg-blue-200 p-2 m-1  rounded-lg">
+                        <a href="{{route('users.posts',$post->user)}}" class="font-bold">{{$post->user->name}}</a>
+                        <span class="text-gray-600 text-xs">{{$post->created_at->diffForHumans()}}</span>
+                        @can('Delete',$post)
+                            <form method="POST" action="{{route('posts.Destroy',$post)}}" class="mr-5 inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class=" text-sm bg-red-300 rounded-lg text-blue-700 p-2">Delete</button>
+                            </form>
+                        @endcan
                         <p class="mb-5"> {{$post->body}}</p>
                     </div>
+                   
                     <div>
-                        <form action="{{route('posts.likes',$post->id)}}" method="POST" class="mr-5 inline">
-                            @csrf
-                            <button type="submit" class="text-blue-200"> like</button>
-                        </form>
-                        <form action="post" class="mr-5 inline">
-                            @csrf
-                            <button type="submit" class="text-blue-200"> Unlike</button>
-                        </form>
+                        @auth
+                        @if(!$post->LikedBy(auth()->user()))
+                            <form action="{{route('posts.likes',$post)}}" method="POST" class="mr-5 inline">
+                                @csrf
+                                <button type="submit" class="text-blue-400"> like</button>
+                            </form>
+                        @else
+                            <form method="POST" action="{{route('posts.likes',$post)}}" class="mr-5 inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-blue-400"> Unlike</button>
+                            </form>
+                        @endif
+                        
+                        @endauth
                         <span class='text-xs'>{{$post->Likes->count()}} {{Str::plural('like',$post->Likes->count())}}</span>
+                        
                     </div>
                 @endforeach
                     {{$posts->links()}}

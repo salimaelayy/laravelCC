@@ -30,7 +30,7 @@
             </div>
             <div class="mb-4">
                 <div class="flex items-center p-1">
-                    <input id="remember" type="checkbox" name="remember">
+                    <input class="m-1" id="remember" type="checkbox" name="remember">
                     <label for="rememberme">Remember Me</label> 
                 </div>
             </div>
