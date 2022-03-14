@@ -32,4 +32,4 @@ Route ::post('/posts',[PostController::class,'store']);
 Route ::delete('/posts/{post}',[PostController::class,'Destroy'])->name('posts.Destroy');
 Route ::post('/posts/{post}/likes',[LikePostController::class,'store'])->name('posts.likes');
 Route ::delete('/posts/{post}/likes',[LikePostController::class,'Destroy'])->name('posts.likes');
-Route ::get('/users/{user}/posts',[PostUserController::class,'index'])->name('users.posts');
+Route ::get('/users/{user:username}/posts',[PostUserController::class,'index'])->name('users.posts');
