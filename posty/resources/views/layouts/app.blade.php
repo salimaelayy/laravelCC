@@ -10,13 +10,15 @@
 <body class="bg-blue-100 ">
     <nav class="flex items-center p-3 bg-white  justify-between mb-6 ">
         <ul class="flex items-center">
-            <li class="p-4"><a href="{{route('home')}}">home</a></li>
-            <li class="p-4"> <a href="{{route('dashboard')}}">Dashboard</a></li>
+           
             
             @if(auth()->user())
+                <li class="p-4"> <a href="{{route('dashboard')}}">Dashboard</a></li>
                 <li class="p-4"><a href="{{route('posts')}}">Posts</a></li>
             @else
-            <li class="p-4"><a href="{{route('login')}}">Posts</a></li>
+                <li class="p-4"><a href="{{route('home')}}">home</a></li>
+                <li class="p-4"> <a href="{{route('login')}}">Dashboard</a></li>
+                <li class="p-4"><a href="{{route('login')}}">Posts</a></li>
             @endif
         </ul>
         <ul class="flex items-center">
