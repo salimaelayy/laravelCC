@@ -17,4 +17,5 @@ class PostUserController extends Controller
             'posts'=> $posts,
         ]);
     }
+    
 }
